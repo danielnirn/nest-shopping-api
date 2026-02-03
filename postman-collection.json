@@ -1,0 +1,221 @@
+{
+  "info": {
+    "name": "NestJS Shopping List API",
+    "_postman_id": "shopping-list-api",
+    "description": "API endpoints for Shopping List management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Shopping Lists",
+      "item": [
+        {
+          "name": "Get All Shopping Lists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists"]
+            }
+          }
+        },
+        {
+          "name": "Get Shopping List by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Shopping List",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Weekend Shopping\",\n  \"date\": \"2026-01-28\",\n  \"completed\": false,\n  \"tasks\": [\n    {\n      \"id\": 1,\n      \"title\": \"Buy vegetables\",\n      \"completed\": false\n    },\n    {\n      \"id\": 2,\n      \"title\": \"Buy fruits\",\n      \"completed\": false\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists"]
+            }
+          }
+        },
+        {
+          "name": "Update Shopping List",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Shopping List Name\",\n  \"completed\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Shopping List",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Get All Tasks from Shopping List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id", "tasks"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Task to Shopping List",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3,\n  \"title\": \"Buy milk\",\n  \"completed\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id", "tasks"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Task in Shopping List",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Buy organic milk\",\n  \"completed\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id/tasks/:taskId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id", "tasks", ":taskId"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                },
+                {
+                  "key": "taskId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Task from Shopping List",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/shopping-lists/:id/tasks/:taskId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "shopping-lists", ":id", "tasks", ":taskId"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PUT_SHOPPING_LIST_ID_HERE"
+                },
+                {
+                  "key": "taskId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
