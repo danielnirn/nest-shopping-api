@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node dist/main",
     "start:dev": "nest start --watch",
-    "build": "nest build",
+    "build": "tsc -p tsconfig.json",
+    "build:nest": "nest build",
     "start:prod": "node dist/main"
   },
   "dependencies": {

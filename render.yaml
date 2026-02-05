@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: nest-shopping-api
+    env: node
+    plan: free
+    buildCommand: npm ci --prefer-offline --no-audit && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
