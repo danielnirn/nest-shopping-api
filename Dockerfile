@@ -1,26 +1,37 @@
-# Use Node 20 LTS
-FROM node:20-alpine
+# Multi-stage build for smaller image
+FROM node:20-alpine AS builder
 
-# Set working directory
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --production=false
+# Install ALL dependencies (including dev)
+RUN npm ci
 
-# Copy source code and data
+# Copy all source files
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build
+RUN npx nest build
 
-# Remove dev dependencies
-RUN npm prune --production
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm ci --only=production
+
+# Copy built files from builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/data ./data
 
 # Expose port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "run", "start:prod"]
+# Start
+CMD ["node", "dist/main"]
