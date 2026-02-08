@@ -13,6 +13,17 @@ import { AppService } from "./app.service";
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  // Health check endpoint
+  @Get("health")
+  getHealth() {
+    return {
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      environment: process.env.NODE_ENV || "development",
+    };
+  }
+
   // Shopping List endpoints
   @Get("shopping-lists")
   async getAllShoppingLists() {
